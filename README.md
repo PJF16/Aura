@@ -42,5 +42,18 @@ The icons are not included in that license. See "Thanks" below for details on th
 	- [HttpClient](https://github.com/amcewen/HttpClient)
 	- [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 	- [WifiManager](https://github.com/tzapu/WiFiManager)
-	- [XPT2046_Touchscreen](https://github.com/PaulStoffregen/XPT2046_Touchscreen)
-	- [lvgl](https://lvgl.io/)
+        - [XPT2046_Touchscreen](https://github.com/PaulStoffregen/XPT2046_Touchscreen)
+        - [lvgl](https://lvgl.io/)
+
+### Adding a new language
+
+1. Copy an existing locale file from `locales/` (for example `en.h`) and rename
+   it using your two-letter language code (`fr.h` for French, etc.).
+2. Translate all strings in the new file and update the weekday array.
+3. Declare your locale in `locales/locales.h` and extend
+   `get_locale_by_code()` in `locales/locales.cpp` so it returns your new
+   structure when the matching code is provided.
+4. Add the language name to the `locale_opts` string and update the selection
+   logic in `settings_event_handler` within `aura/weather.ino` to map the
+   dropdown index to the new locale code.
+5. Rebuild and flash the firmware.
